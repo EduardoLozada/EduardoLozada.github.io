@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es" data-critters-container>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Eduardo Lozada | Desarrollador Web Full Stack</title>
+    <meta name="description" content="Portafolio de Eduardo Lozada, Analista De Software & Programador BackEnd/FrontEnd con experiencia en desarrollo web y aplicaciones.">
+    <meta name="keywords" content="desarrollador web, programador, angular, portfolio, desarrollador full stack, backend, frontend">
+    <meta name="author" content="Eduardo Lozada">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Eduardo Lozada | Desarrollador Web Full Stack">
+    <meta property="og:description" content="Portafolio de Eduardo Lozada, Analista De Software & Programador BackEnd/FrontEnd con experiencia en desarrollo web y aplicaciones.">
+    <meta property="og:type" content="website">
+    
+    <!-- Precargar recursos críticos -->
+    <link rel="preload" href="favicon.ico" as="image">
+    <link rel="preload" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700&display=swap" as="style">
+    <link rel="preload" href="assets/css/style.css" as="style">
+    
+    <!-- Conexiones previas para mejorar rendimiento -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://code.jquery.com">
+    
+    <!-- Estilos críticos -->
+    <link rel="icon" href="favicon.ico">
+    <style type="text/css">@font-face{font-family:'Poppins';font-style:normal;font-weight:300;font-display:swap;src:url(https://fonts.gstatic.com/s/poppins/v22/pxiByp8kv8JHgFVrLDz8Z1JlFd2JQEl8qw.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;}@font-face{font-family:'Poppins';font-style:normal;font-weight:300;font-display:swap;src:url(https://fonts.gstatic.com/s/poppins/v22/pxiByp8kv8JHgFVrLDz8Z1xlFd2JQEk.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}@font-face{font-family:'Poppins';font-style:normal;font-weight:400;font-display:swap;src:url(https://fonts.gstatic.com/s/poppins/v22/pxiEyp8kv8JHgFVrJJnecnFHGPezSQ.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;}@font-face{font-family:'Poppins';font-style:normal;font-weight:400;font-display:swap;src:url(https://fonts.gstatic.com/s/poppins/v22/pxiEyp8kv8JHgFVrJJfecnFHGPc.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}@font-face{font-family:'Poppins';font-style:normal;font-weight:500;font-display:swap;src:url(https://fonts.gstatic.com/s/poppins/v22/pxiByp8kv8JHgFVrLGT9Z1JlFd2JQEl8qw.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;}@font-face{font-family:'Poppins';font-style:normal;font-weight:500;font-display:swap;src:url(https://fonts.gstatic.com/s/poppins/v22/pxiByp8kv8JHgFVrLGT9Z1xlFd2JQEk.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}@font-face{font-family:'Poppins';font-style:normal;font-weight:600;font-display:swap;src:url(https://fonts.gstatic.com/s/poppins/v22/pxiByp8kv8JHgFVrLEj6Z1JlFd2JQEl8qw.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;}@font-face{font-family:'Poppins';font-style:normal;font-weight:600;font-display:swap;src:url(https://fonts.gstatic.com/s/poppins/v22/pxiByp8kv8JHgFVrLEj6Z1xlFd2JQEk.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}@font-face{font-family:'Poppins';font-style:normal;font-weight:700;font-display:swap;src:url(https://fonts.gstatic.com/s/poppins/v22/pxiByp8kv8JHgFVrLCz7Z1JlFd2JQEl8qw.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;}@font-face{font-family:'Poppins';font-style:normal;font-weight:700;font-display:swap;src:url(https://fonts.gstatic.com/s/poppins/v22/pxiByp8kv8JHgFVrLCz7Z1xlFd2JQEk.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}</style>
+    <style>@import url('https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css');@import url('https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css');@import url('https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css');</style><link rel="stylesheet" href="assets/css/plugins.min.css" type="text/css" media="print" onload="this.media='print'"><noscript><link rel="stylesheet" href="assets/css/plugins.min.css" media="print"></noscript>
+    <style>body{font:400 14px 'Poppins', sans-serif;-webkit-font-smoothing:antialiased;line-height:30px;color:#727272;font-size:16px;font-weight:300;line-height:2.2;overflow-x:hidden}@-webkit-keyframes pulse{0%{-webkit-transform:scale3d(1, 1, 1);transform:scale3d(1, 1, 1)}50%{-webkit-transform:scale3d(1.05, 1.05, 1.05);transform:scale3d(1.05, 1.05, 1.05)}100%{-webkit-transform:scale3d(1, 1, 1);transform:scale3d(1, 1, 1)}}@-webkit-keyframes bgScroll{0%{-webkit-transform:translateY(0);transform:translateY(0)}100%{-webkit-transform:translateY(-1934px);transform:translateY(-1934px)}}</style><link rel="stylesheet" href="assets/css/style.css" type="text/css" data-critical="true" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="assets/css/style.css"></noscript>
+    <style>@media (max-width: 768px){}@media (prefers-reduced-data: reduce){*{animation:none !important;transition:none !important}}@media (prefers-reduced-motion: reduce){*{animation-duration:0.01ms !important;animation-iteration-count:1 !important;transition-duration:0.01ms !important;scroll-behavior:auto !important}}</style><link rel="stylesheet" href="assets/css/performance-optimizations.css" type="text/css" data-critical="true" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="assets/css/performance-optimizations.css"></noscript>
+    
+    <!-- Sistema de protección básico para compatibilidad con el navegador -->
+    <script>
+      (function() {
+        
+        
+        // Protección básica para String.prototype.match
+        const originalMatch = String.prototype.match;
+        String.prototype.match = function() {
+          try {
+            if (this === undefined || this === null) {
+              return null;
+            }
+            return originalMatch.apply(this, arguments);
+          } catch (e) {
+            return null;
+          }
+        };
+        
+        // Monitoreo de errores
+        window.onerror = function(message, source, lineno, colno, error) {
+          // Loguear el error para diagnóstico
+          console.warn('Error capturado:', message, source, lineno);
+          
+          // Continuar ejecución normal
+          return false;
+        };
+        
+        
+      })();
+    </script>
+    
+    <!-- GSAP para animaciones -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.3/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.3/ScrollTrigger.min.js"></script>
+    
+    <!-- Vanilla Tilt para efectos 3D -->
+    <script src="https://unpkg.com/vanilla-tilt@1.7.0/dist/vanilla-tilt.min.js"></script>
+<style>@import"https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap";:root{--primary-color:#4f46e5;--primary-color-rgb:79, 70, 229;--primary-dark:#3730a3;--primary-dark-rgb:55, 48, 163;--secondary-color:#06b6d4;--secondary-color-rgb:6, 182, 212;--accent-color:#f43f5e;--accent-color-rgb:244, 63, 94;--background-color:#ffffff;--background-color-rgb:255, 255, 255;--background-secondary:#f8fafc;--background-secondary-rgb:248, 250, 252;--dark-background:#0f172a;--dark-background-rgb:15, 23, 42;--dark-background-secondary:#1e293b;--dark-background-secondary-rgb:30, 41, 59;--text-color:#1e293b;--text-secondary:#475569;--text-light:#f8fafc;--border-color:#cbd5e1;--border-color-rgb:203, 213, 225;--shadow-color:0, 0, 0;--shadow-color-light:226, 232, 240;--card-background:#ffffff;--card-background-rgb:255, 255, 255;--card-background-dark:#1e293b;--card-background-dark-rgb:30, 41, 59;--border-radius-sm:6px;--border-radius:10px;--border-radius-xl:16px;--border-radius-rounded:50px;--border-radius-full:50%;--space-xs:.25rem;--space-sm:.5rem;--space-md:1rem;--space-lg:1.5rem;--space-xl:2.5rem;--space-xxl:4rem;--transition-speed:.3s;--transition-timing:cubic-bezier(.4, 0, .2, 1);--animation-curve:cubic-bezier(.16, 1, .3, 1);--font-primary:"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;--font-heading:"Outfit", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;--font-mono:"Fira Code", monospace;--background-gradient:linear-gradient(135deg, rgba(255, 255, 255, .9), rgba(248, 250, 252, .8));--background-gradient-dark:linear-gradient(135deg, rgba(15, 23, 42, .95), rgba(30, 41, 59, .85));--primary-gradient:linear-gradient(135deg, var(--primary-color), var(--secondary-color));--accent-gradient:linear-gradient(135deg, var(--secondary-color), var(--accent-color));--border-gradient:linear-gradient(to right, var(--primary-color), var(--secondary-color))}*{box-sizing:border-box;margin:0;padding:0}html,body{height:100%;min-height:100vh;margin:0;padding:0;overflow-x:hidden;overflow-y:auto}body{background-color:var(--background-color);background-image:var(--background-gradient);color:var(--text-color);transition:background-color var(--transition-speed) var(--transition-timing),color var(--transition-speed) var(--transition-timing);margin:0;padding:0;font-family:Poppins,Helvetica Neue,Helvetica,Arial,sans-serif;font-size:1rem;line-height:1.5;min-height:100vh;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;scroll-behavior:smooth}body:not(.dark-theme){color-scheme:light}@media (max-width: 768px){:root{--font-size-base:14px}}</style><link rel="stylesheet" href="styles.3f4d41652f5794cc.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="styles.3f4d41652f5794cc.css"></noscript></head>
+
+<body>
+  <app-root>
+    <div class="loading-placeholder">
+      <div class="loading-spinner"></div>
+    </div>
+  </app-root>
+  <!-- Comentado el archivo plugins.min.js que está causando el error getVideoIframe -->
+  <!-- <script defer src="assets/js/plugins.min.js"></script> -->
+  <!-- Comentado el archivo main.js externo que causa conflictos con Angular -->
+  <!-- <script defer src="assets/js/main.js"></script> -->
+  <script>
+    // Inicializar efectos tilt una vez que la página haya cargado
+    document.addEventListener('DOMContentLoaded', function() {
+      try {
+        // Se inicializará automáticamente en elementos con atributo data-tilt
+        setTimeout(function() {
+          const tiltElements = document.querySelectorAll('[data-tilt]');
+          if (tiltElements && tiltElements.length > 0) {
+            if (typeof VanillaTilt !== 'undefined') {
+              VanillaTilt.init(tiltElements, {
+                max: 10,
+                speed: 400,
+                glare: true,
+                'max-glare': 0.1,
+              });
+            }
+          }
+        }, 1000);
+      } catch (error) {
+        console.error('Error inicializando efectos tilt:', error);
+      }
+    });
+  </script>
+  <!-- jQuery y plugins necesarios -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" defer></script>
+  <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js" defer></script>
+  <script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js" defer></script>
+  
+  <!-- Scripts de optimización -->
+  <script src="assets/js/image-optimizer.js" defer></script>
+  <script src="assets/js/performance-optimizer.js" defer></script>
+  <script src="assets/js/resource-optimizer.js" defer></script>
+  <script src="assets/js/animation-optimizer.js" defer></script>
+<script src="runtime.2c095baf0a288713.js" type="module"></script><script src="polyfills.aac151541d3d7222.js" type="module"></script><script src="scripts.050d3beb1d7907be.js" defer></script><script src="main.99bda8705154015a.js" type="module"></script></body>
+</html>
+
+
+
+

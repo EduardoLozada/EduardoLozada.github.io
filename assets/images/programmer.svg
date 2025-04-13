@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="400" height="300">
+  <style>
+    .programmer-desk { fill: #e2e8f0; }
+    .monitor { fill: #1e293b; }
+    .screen { fill: #0f172a; }
+    .code-line { stroke: #6366f1; stroke-width: 2; }
+    .person { fill: #475569; }
+    .chair { fill: #334155; }
+    @keyframes type {
+      from { stroke-dashoffset: 100; }
+      to { stroke-dashoffset: -100; }
+    }
+    @keyframes glow {
+      0% { filter: drop-shadow(0 0 2px #6366f1); }
+      50% { filter: drop-shadow(0 0 8px #6366f1); }
+      100% { filter: drop-shadow(0 0 2px #6366f1); }
+    }
+    .code-line {
+      stroke-dasharray: 50;
+      animation: type 4s linear infinite,
+                 glow 2s ease-in-out infinite;
+    }
+  </style>
+  
+  <!-- Desk -->
+  <rect class="programmer-desk" x="200" y="300" width="400" height="20" rx="2"/>
+  
+  <!-- Monitor -->
+  <rect class="monitor" x="250" y="150" width="300" height="200" rx="10"/>
+  <rect class="screen" x="260" y="160" width="280" height="180" rx="5"/>
+  
+  <!-- Code Lines -->
+  <line class="code-line" x1="280" y1="180" x2="520" y2="180"/>
+  <line class="code-line" x1="280" y1="200" x2="480" y2="200"/>
+  <line class="code-line" x1="280" y1="220" x2="500" y2="220"/>
+  
+  <!-- Person -->
+  <path class="person" d="M380 280 L380 400 M380 320 L340 360 M380 320 L420 360 M380 280 A20 20 0 1 1 381 280"/>
+  
+  <!-- Chair -->
+  <path class="chair" d="M350 400 L410 400 L430 450 L330 450 Z"/>
+</svg>

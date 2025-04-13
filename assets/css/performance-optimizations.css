@@ -1,0 +1,146 @@
+/**
+ * Performance Optimizations CSS
+ * Estilos específicos para mejorar el rendimiento visual
+ */
+
+/* Prevenir Cumulative Layout Shift (CLS) */
+img, video, iframe {
+  aspect-ratio: attr(width) / attr(height);
+  height: auto;
+  contain: content;
+}
+
+/* Optimizar contenedores de imágenes para evitar CLS */
+.image-container {
+  position: relative;
+  overflow: hidden;
+  height: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.05); /* Placeholder sutil */
+}
+
+.image-container[data-ratio="16:9"] {
+  padding-bottom: 56.25%;
+}
+
+.image-container[data-ratio="4:3"] {
+  padding-bottom: 75%;
+}
+
+.image-container[data-ratio="1:1"] {
+  padding-bottom: 100%;
+}
+
+.image-container img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.3s ease-in;
+}
+
+/* Optimizaciones para el preloader */
+.preloader {
+  will-change: opacity;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+.preloader-left {
+  will-change: transform;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+/* Optimizaciones para animaciones */
+.animated, 
+.menu-block, 
+.social a, 
+.btn-download,
+.name-block-container h1,
+.name-block-container h2 {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+/* Contenido invisible durante la carga */
+.fonts-loading {
+  visibility: hidden;
+}
+
+/* Optimizaciones para scroll */
+.content-blocks {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  scroll-behavior: smooth;
+}
+
+/* Optimizaciones para imágenes de fondo */
+.bgScroll, .bg-image {
+  background-size: cover;
+  background-position: center;
+  transform: translateZ(0);
+  will-change: opacity;
+  transition: opacity 0.3s ease-in;
+}
+
+/* Optimizaciones para efectos hover */
+.btn:hover,
+.social a:hover,
+.menu-item:hover {
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Clase para elementos con lazy loading */
+.lazy {
+  opacity: 0;
+  transition: opacity 0.3s ease-in;
+}
+
+/* Clase para feedback visual en clics */
+.clicked {
+  transform: scale(0.98);
+  transition: transform 0.1s ease-out;
+}
+
+/* Optimizaciones para dispositivos móviles */
+@media (max-width: 768px) {
+  /* Reducir complejidad visual en móviles */
+  .animated {
+    animation-duration: 0.5s !important;
+  }
+  
+  /* Desactivar efectos pesados en móviles */
+  .parallax-effect,
+  .complex-animation {
+    display: none !important;
+  }
+}
+
+/* Optimizaciones para modo de ahorro de datos */
+@media (prefers-reduced-data: reduce) {
+  /* Desactivar animaciones y efectos */
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+  
+  /* Cargar imágenes de menor resolución */
+  img[data-src-low] {
+    content: attr(data-src-low);
+  }
+}
+
+/* Optimizaciones para modo de reducción de movimiento */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

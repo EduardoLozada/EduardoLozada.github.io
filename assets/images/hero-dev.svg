@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs>
+    <!-- Gradientes -->
+    <linearGradient id="laptopGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#6366f1;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#818cf8;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="coffeeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#92400e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#b45309;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Animaciones -->
+    <style type="text/css">
+      @keyframes float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+      }
+      @keyframes typing {
+        0% { width: 0; }
+        100% { width: 100px; }
+      }
+      @keyframes blink {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0; }
+      }
+      @keyframes steam {
+        0% { transform: translateY(0) scale(1); opacity: 0.8; }
+        100% { transform: translateY(-10px) scale(1.5); opacity: 0; }
+      }
+      
+      #developer { animation: float 6s ease-in-out infinite; }
+      #typingText { animation: typing 2s steps(20) infinite; }
+      #cursor { animation: blink 1s step-end infinite; }
+      .steam { animation: steam 2s ease-out infinite; }
+    </style>
+  </defs>
+
+  <!-- Grupo principal del desarrollador -->
+  <g id="developer" transform="translate(200,100)">
+    <!-- Laptop -->
+    <g id="laptop">
+      <rect x="100" y="200" width="300" height="200" rx="10" fill="url(#laptopGradient)" />
+      <rect x="120" y="220" width="260" height="160" fill="#1e293b" />
+      <!-- Código en la pantalla -->
+      <rect id="typingText" x="140" y="240" width="0" height="10" fill="#6366f1" opacity="0.8" />
+      <rect id="cursor" x="145" y="240" width="5" height="10" fill="#ffffff" />
+    </g>
+
+    <!-- Taza de café -->
+    <g id="coffee">
+      <path d="M450,250 h40 a20,20 0 0 1 20,20 v60 a20,20 0 0 1 -20,20 h-40 a20,20 0 0 1 -20,-20 v-60 a20,20 0 0 1 20,-20" fill="url(#coffeeGradient)" />
+      <!-- Vapor del café -->
+      <path class="steam" d="M460,240 q5,-10 10,0" stroke="#6b7280" fill="none" stroke-width="2" />
+      <path class="steam" d="M470,240 q5,-10 10,0" stroke="#6b7280" fill="none" stroke-width="2" />
+      <path class="steam" d="M480,240 q5,-10 10,0" stroke="#6b7280" fill="none" stroke-width="2" />
+    </g>
+
+    <!-- Persona -->
+    <g id="person">
+      <!-- Cabeza -->
+      <circle cx="300" cy="150" r="50" fill="#422006" />
+      <!-- Cara -->
+      <g id="face">
+        <path d="M280,140 q20,-10 40,0" fill="none" stroke="#422006" stroke-width="3" />
+        <circle cx="285" cy="130" r="5" fill="#422006" />
+        <circle cx="315" cy="130" r="5" fill="#422006" />
+      </g>
+      <!-- Barba -->
+      <path d="M270,160 q30,30 60,0" fill="#422006" />
+      <!-- Cuerpo -->
+      <path d="M300,200 v100 h-60 v100" fill="none" stroke="#6366f1" stroke-width="40" />
+    </g>
+  </g>
+
+  <!-- Elementos decorativos de fondo -->
+  <g id="background" opacity="0.1">
+    <circle cx="100" cy="100" r="50" fill="#6366f1" />
+    <circle cx="700" cy="500" r="80" fill="#818cf8" />
+    <path d="M600,100 l50,50 l-50,50 l-50,-50 z" fill="#6366f1" />
+  </g>
+</svg> 

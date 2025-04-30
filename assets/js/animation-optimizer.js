@@ -1,6 +1,7 @@
 /**
  * Animation Optimizer Script
- * Optimiza las animaciones para mejorar el rendimiento
+ * Optimiza las animaciones para mejorar el rendimiento y la experiencia en dispositivos móviles
+ * Versión mejorada para Android
  */
 
 (function() {
@@ -8,12 +9,15 @@
 
   // Configuración
   const config = {
-    reduceMotion: false,           // Reducir animaciones automáticamente
-    optimizeGSAP: true,           // Optimizar animaciones GSAP
-    throttleAnimations: true,     // Limitar frecuencia de animaciones
-    disableHeavyEffectsOnMobile: true // Desactivar efectos pesados en móviles
+    reduceMotion: true,            // Reducir animaciones automáticamente
+    optimizeGSAP: true,            // Optimizar animaciones GSAP
+    throttleAnimations: true,      // Limitar frecuencia de animaciones
+    disableHeavyEffectsOnMobile: true, // Desactivar efectos pesados en móviles
+    disableRotationOnAndroid: true,  // Desactivar rotaciones en Android
+    forceDisableRotation: true,     // Forzar desactivación de rotaciones en todos los dispositivos
+    strictAndroidOptimization: true, // Optimización estricta para Android (soluciona problemas de rotación)
+    improveAndroidPerformance: true  // Mejoras adicionales de rendimiento para Android
   };
-
   // Variables de estado
   let isReducedMotionPreferred = false;
   let isMobile = false;
@@ -68,9 +72,31 @@
     // Detectar preferencia de reducción de movimiento
     isReducedMotionPreferred = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     
-    // Aplicar configuración basada en preferencias del usuario
-    if (isReducedMotionPreferred || config.reduceMotion) {
+    // Detectar si es un dispositivo Android específicamente - Mejorado para mayor precisión y fiabilidad
+    const isAndroid = /Android/i.test(navigator.userAgent);
+    const isChromeMobile = /Chrome/i.test(navigator.userAgent) && /Mobile/i.test(navigator.userAgent);
+    const isAndroidBrowser = /Android/i.test(navigator.userAgent) && /Version\/\d/i.test(navigator.userAgent);
+    const isSamsungBrowser = /SamsungBrowser/i.test(navigator.userAgent);
+    const isDefinitelyAndroid = isAndroid || (isChromeMobile && /Android/i.test(navigator.userAgent)) || isAndroidBrowser || isSamsungBrowser;
+    
+    // Aplicar configuración basada en preferencias del usuario y tipo de dispositivo
+    if (isReducedMotionPreferred || config.reduceMotion || isDefinitelyAndroid) {
       document.documentElement.classList.add('reduced-motion');
+    }
+    
+    // Si es Android, añadir clase específica para optimizaciones adicionales
+    if (isDefinitelyAndroid) {
+      document.documentElement.classList.add('android-device');
+      // Forzar reducción de movimiento en Android para evitar problemas de rendimiento
+      config.reduceMotion = true;
+      config.disableHeavyEffectsOnMobile = true;
+      config.disableRotationOnAndroid = true;
+      config.forceDisableRotation = true;
+      
+      // Aplicar optimización estricta si está configurada
+      if (config.strictAndroidOptimization) {
+        document.documentElement.classList.add('android-strict-optimization');
+      }
     }
     
     // Detectar si es un dispositivo móvil
@@ -333,10 +359,16 @@
 
   /**
    * Optimiza efectos de hover
+   * Versión mejorada para solucionar problemas en Android
    */
   function optimizeHoverEffects() {
-    // Seleccionar elementos con efectos hover
-    const hoverElements = document.querySelectorAll('.btn, .social a, .menu-item');
+    // Seleccionar elementos con efectos hover - Ampliado para incluir más elementos
+    const hoverElements = document.querySelectorAll(
+      '.btn, .social a, .menu-item, .portfolio-card, .skill-card, ' +
+      '.testimonial-card, .nav-card, .blog-card, .icon-container, ' +
+      '.floating-social a, .floating-social li, [class*="hover"], ' +
+      '[class*="anim"], [class*="fade"], [class*="tilt"]'
+    );
     
     hoverElements.forEach(el => {
       // En dispositivos táctiles, usar enfoque en toque en lugar de hover
@@ -353,54 +385,456 @@
       }
       
       // Optimizar transiciones de hover
-      if (isLowEndDevice) {
+      if (isLowEndDevice || isMobile) {
         el.style.transitionDuration = '0.2s';
       }
+      
+      // Prevenir rotaciones en dispositivos Android y móviles
+      if (/Android/i.test(navigator.userAgent) || isMobile) {
+        // Eliminar cualquier transformación existente
+        el.style.transform = 'none';
+        el.style.rotate = '0deg';
+        el.style.perspective = 'none';
+        el.style.transformStyle = 'flat';
+        
+        // Aplicar solo transformación vertical en hover
+        el.addEventListener('mouseenter', function() {
+          this.style.transform = 'translateY(-5px)';
+          this.style.rotate = '0deg';
+          this.style.perspective = 'none';
+          this.style.transformStyle = 'flat';
+        });
+        
+        el.addEventListener('mouseleave', function() {
+          this.style.transform = 'none';
+          this.style.rotate = '0deg';
+          this.style.perspective = 'none';
+          this.style.transformStyle = 'flat';
+        });
+        
+        // Aplicar los mismos efectos para eventos táctiles
+        el.addEventListener('touchstart', function() {
+          this.style.transform = 'translateY(-5px)';
+          this.style.rotate = '0deg';
+          this.style.perspective = 'none';
+          this.style.transformStyle = 'flat';
+        }, { passive: true });
+        
+        el.addEventListener('touchend', function() {
+          this.style.transform = 'none';
+          this.style.rotate = '0deg';
+          this.style.perspective = 'none';
+          this.style.transformStyle = 'flat';
+        }, { passive: true });
+      }
     });
+    
+    // Desactivar animaciones de rotación en GSAP para todos los dispositivos móviles
+    if ((isMobile || /Android/i.test(navigator.userAgent)) && window.gsap) {
+      try {
+        // Sobrescribir métodos de GSAP para prevenir rotaciones
+        const originalTo = gsap.to;
+        gsap.to = function(targets, vars) {
+          // Eliminar propiedades de rotación y transformación 3D
+          if (vars) {
+            vars.rotation = 0;
+            vars.rotateX = 0;
+            vars.rotateY = 0;
+            vars.rotateZ = 0;
+            vars.rotate = 0;
+            vars.transformPerspective = 0;
+            vars.transformStyle = 'flat';
+            
+            // Limitar transformaciones a solo desplazamiento vertical
+            if (vars.x) vars.x = 0;
+            if (vars.z) vars.z = 0;
+            
+            // Reducir duración de animaciones
+            if (vars.duration && vars.duration > 0.5) {
+              vars.duration = 0.5;
+            }
+          }
+          return originalTo.call(this, targets, vars);
+        };
+        
+        // También sobrescribir otros métodos de animación
+        if (gsap.fromTo) {
+          const originalFromTo = gsap.fromTo;
+          gsap.fromTo = function(targets, fromVars, toVars) {
+            // Eliminar propiedades de rotación
+            if (toVars) {
+              toVars.rotation = 0;
+              toVars.rotateX = 0;
+              toVars.rotateY = 0;
+              toVars.rotateZ = 0;
+              toVars.rotate = 0;
+              toVars.transformPerspective = 0;
+              toVars.transformStyle = 'flat';
+              
+              // Limitar transformaciones
+              if (toVars.x) toVars.x = 0;
+              if (toVars.z) toVars.z = 0;
+            }
+            return originalFromTo.call(this, targets, fromVars, toVars);
+          };
+        }
+      } catch (e) {
+        console.warn('Error al modificar GSAP para dispositivos móviles:', e);
+      }
+    }
   }
 
   /**
    * Aplica optimizaciones específicas para dispositivos móviles
+   * Versión mejorada para solucionar problemas en Android
    */
   function applyMobileOptimizations() {
     // Desactivar efectos complejos en móviles
-    const complexEffects = document.querySelectorAll('.parallax-effect, .complex-animation, [data-tilt]');
+    const complexEffects = document.querySelectorAll('.parallax-effect, .complex-animation, [data-tilt], [data-animation], .animated, .gsap-animated');
     complexEffects.forEach(el => {
       el.classList.add('disabled-on-mobile');
     });
     
-    // Desactivar VanillaTilt en móviles
+    // Desactivar completamente VanillaTilt en móviles
     if (window.VanillaTilt) {
+      // Eliminar atributos data-tilt de todos los elementos
       const tiltElements = document.querySelectorAll('[data-tilt]');
       tiltElements.forEach(el => {
         el.removeAttribute('data-tilt');
+        // Eliminar cualquier transformación aplicada por VanillaTilt
+        el.style.transform = 'none';
+        el.style.transition = 'opacity 0.3s ease, box-shadow 0.3s ease';
       });
+      
+      // Intentar destruir instancias existentes de VanillaTilt
+      try {
+        if (typeof VanillaTilt.destroy === 'function') {
+          VanillaTilt.destroy(document.querySelectorAll('.js-tilt, [data-tilt]'));
+        }
+      } catch (e) {
+        console.warn('No se pudieron destruir instancias de VanillaTilt:', e);
+      }
     }
     
-    // Reducir calidad de imágenes de fondo en móviles
-    const bgElements = document.querySelectorAll('.bgScroll, .bg-image');
-    bgElements.forEach(el => {
-      el.classList.add('reduced-quality-mobile');
+    // Desactivar rotaciones en tarjetas e iconos - Implementación mejorada
+    const cardElements = document.querySelectorAll(
+      '.card, .portfolio-card, .skill-card, .testimonial-card, .social a, .icon-container, ' +
+      '.nav-card, .floating-social a, .floating-social li, .btn, .menu-item, .menu-block, ' +
+      '.animated, [class*="anim"], [class*="fade"], [class*="rotate"], [class*="flip"], ' +
+      '[class*="tilt"], [class*="hover"], [style*="transform"], [style*="rotate"], ' +
+      '[style*="perspective"], [data-animation], .gsap-animated'
+    );
+    
+    cardElements.forEach(el => {
+      // Añadir clase para estilos CSS
+      el.classList.add('no-rotation');
+      
+      // Aplicar estilos inline para forzar la desactivación de rotaciones
+      el.style.transform = 'none';
+      el.style.transition = 'opacity 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease';
+      el.style.perspective = 'none';
+      el.style.rotate = '0deg';
+      el.style.transformStyle = 'flat';
+      
+      // Eliminar listeners de eventos que podrían causar rotaciones
+      const clone = el.cloneNode(true);
+      el.parentNode.replaceChild(clone, el);
+      
+      // Añadir listener para permitir solo desplazamiento vertical en hover
+      clone.addEventListener('mouseenter', function() {
+        this.style.transform = 'translateY(-5px)';
+        this.style.rotate = '0deg';
+        this.style.perspective = 'none';
+        this.style.transformStyle = 'flat';
+      });
+      
+      clone.addEventListener('mouseleave', function() {
+        this.style.transform = 'none';
+        this.style.rotate = '0deg';
+        this.style.perspective = 'none';
+      });
     });
     
-    // Añadir estilos específicos para móviles
+    // Desactivar específicamente las rotaciones en elementos con animaciones GSAP
+    if (window.gsap) {
+      try {
+        // Sobrescribir métodos de GSAP para prevenir rotaciones en todos los dispositivos móviles
+        const originalTo = gsap.to;
+        gsap.to = function(targets, vars) {
+          // Eliminar propiedades de rotación y transformación 3D
+          if (vars) {
+            vars.rotation = 0;
+            vars.rotateX = 0;
+            vars.rotateY = 0;
+            vars.rotateZ = 0;
+            vars.rotate = 0;
+            vars.transformPerspective = 0;
+            vars.transformStyle = 'flat';
+            
+            // Limitar transformaciones a solo desplazamiento vertical
+            if (vars.x) vars.x = 0;
+            if (vars.z) vars.z = 0;
+            
+            // Reducir duración de animaciones
+            if (vars.duration && vars.duration > 0.5) {
+              vars.duration = 0.5;
+            }
+          }
+          return originalTo.call(this, targets, vars);
+        };
+        
+        // Aplicar a todos los elementos animados por GSAP
+        const gsapElements = document.querySelectorAll('.gsap-animated, [data-animation]');
+        gsapElements.forEach(el => {
+          el.classList.add('no-rotation');
+          el.style.transform = 'none';
+          el.style.rotate = '0deg';
+          el.style.perspective = 'none';
+          el.style.transformStyle = 'flat';
+        });
+      } catch (e) {
+        console.warn('Error al modificar GSAP para dispositivos móviles:', e);
+      }
+    }
+    
+    // Optimizar imágenes y fondos para mejor rendimiento
+    const bgElements = document.querySelectorAll('.bgScroll, .bg-image, [style*="background"]');
+    bgElements.forEach(el => {
+      el.classList.add('reduced-quality-mobile');
+      // Forzar scroll en lugar de fixed para mejor rendimiento
+      el.style.backgroundAttachment = 'scroll';
+      el.style.backgroundSize = 'cover';
+    });
+    
+    // Añadir estilos específicos para móviles y Android - Implementación mejorada
     const mobileStyle = document.createElement('style');
     mobileStyle.textContent = `
+      /* Optimizaciones generales para móviles */
       @media (max-width: 768px) {
+        /* Desactivar efectos complejos */
         .disabled-on-mobile {
           transform: none !important;
-          transition: opacity 0.3s ease-out !important;
+          transition: opacity 0.3s ease-out, box-shadow 0.3s ease !important;
           animation: none !important;
+          perspective: none !important;
+          rotate: 0deg !important;
+          transform-style: flat !important;
         }
         
+        /* Optimizar imágenes de fondo */
         .reduced-quality-mobile {
           background-attachment: scroll !important;
           background-size: cover !important;
+          background-position: center center !important;
         }
         
+        /* Optimizar transiciones de página */
         .page-transitioning * {
           transition-duration: 0.3s !important;
         }
+        
+        /* Prevenir rotaciones */
+        .no-rotation {
+          transform: none !important;
+          transition: opacity 0.3s ease-out, box-shadow 0.3s ease, transform 0.3s ease !important;
+          animation: none !important;
+          perspective: none !important;
+          rotate: 0deg !important;
+          transform-style: flat !important;
+        }
+        
+        /* Permitir solo desplazamiento vertical en hover */
+        .no-rotation:hover,
+        .card:hover,
+        .portfolio-card:hover,
+        .skill-card:hover,
+        .testimonial-card:hover,
+        .nav-card:hover,
+        .blog-card:hover,
+        .btn:hover,
+        .menu-item:hover,
+        .social a:hover,
+        .icon-container:hover {
+          transform: translateY(-5px) !important;
+          rotate: 0deg !important;
+          perspective: none !important;
+          transform-style: flat !important;
+        }
+        
+        /* Eliminar pseudo-elementos que puedan causar problemas */
+        .portfolio-card::before,
+        .portfolio-card::after,
+        .skill-card::before,
+        .skill-card::after,
+        .testimonial-card::before,
+        .testimonial-card::after,
+        .nav-card::before,
+        .nav-card::after,
+        .btn::before,
+        .btn::after {
+          display: none !important;
+        }
+        
+        /* Optimizar iconos */
+        .icon-container i,
+        .social a i,
+        .floating-social a i,
+        .floating-social li i,
+        [class*="icon"],
+        [class*="fa-"] {
+          transform: none !important;
+          transition: opacity 0.3s ease, color 0.3s ease !important;
+          rotate: 0deg !important;
+          animation: none !important;
+        }
+        
+        /* Desactivar todas las animaciones de rotación */
+        [class*="rotate"],
+        [class*="perspective"],
+        [class*="flip"],
+        [class*="tilt"],
+        [style*="rotate"],
+        [style*="perspective"],
+        [style*="transform"] {
+          transform: none !important;
+          rotate: 0deg !important;
+          perspective: none !important;
+          transform-style: flat !important;
+          transition: opacity 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease !important;
+        }
+        
+        /* Optimizar menús y navegación */
+        .menu-block,
+        .menu-item,
+        .nav-item,
+        .navbar,
+        header,
+        .header {
+          transform: none !important;
+          perspective: none !important;
+          rotate: 0deg !important;
+          transition: opacity 0.3s ease, background-color 0.3s ease !important;
+        }
+        
+        /* Mejorar espaciado y tamaños para móviles */
+        h1, h2, h3 {
+          margin-bottom: 15px !important;
+        }
+        
+        p, .text-content {
+          margin-bottom: 20px !important;
+          font-size: 16px !important;
+          line-height: 1.5 !important;
+        }
+        
+        .btn, button {
+          padding: 10px 20px !important;
+          margin: 10px 0 !important;
+          min-height: 44px !important; /* Mejorar accesibilidad táctil */
+        }
+        
+        /* Mejorar espaciado de contenedores */
+        .container, .row, section {
+          padding-left: 15px !important;
+          padding-right: 15px !important;
+          margin-bottom: 30px !important;
+        }
+      }
+      
+      /* Estilos específicos para Android - Optimización completa */
+      .android-device .portfolio-card,
+      .android-device .skill-card,
+      .android-device .testimonial-card,
+      .android-device .social a,
+      .android-device .icon-container,
+      .android-device .nav-card,
+      .android-device .blog-card,
+      .android-device .floating-social a,
+      .android-device .floating-social li,
+      .android-device .btn,
+      .android-device .menu-item,
+      .android-device .menu-block,
+      .android-device [class*="anim"],
+      .android-device [class*="fade"] {
+        transform: none !important;
+        transition: opacity 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease !important;
+        animation: none !important;
+        perspective: none !important;
+        rotate: 0deg !important;
+        transform-style: flat !important;
+      }
+      
+      /* Permitir solo desplazamiento vertical en hover para Android */
+      .android-device .portfolio-card:hover,
+      .android-device .skill-card:hover,
+      .android-device .testimonial-card:hover,
+      .android-device .social a:hover,
+      .android-device .icon-container:hover,
+      .android-device .nav-card:hover,
+      .android-device .blog-card:hover,
+      .android-device .floating-social a:hover,
+      .android-device .floating-social li:hover,
+      .android-device .btn:hover,
+      .android-device .menu-item:hover {
+        transform: translateY(-5px) !important;
+        rotate: 0deg !important;
+        perspective: none !important;
+        transform-style: flat !important;
+      }
+      
+      /* Optimización estricta para Android - Soluciona problemas de rotación */
+      .android-strict-optimization * {
+        transform: none !important;
+        rotate: 0deg !important;
+        perspective: none !important;
+        transform-style: flat !important;
+        transition: opacity 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease, color 0.3s ease !important;
+      }
+      
+      /* Permitir solo desplazamiento vertical en hover para optimización estricta */
+      .android-strict-optimization *:hover {
+        transform: translateY(-5px) !important;
+        rotate: 0deg !important;
+        perspective: none !important;
+        transform-style: flat !important;
+      }
+      
+      /* Desactivar animaciones específicas que causan problemas en Android */
+      .android-device [class*="rotate"],
+      .android-device [class*="perspective"],
+      .android-device [class*="flip"],
+      .android-device [class*="tilt"],
+      .android-device [style*="rotate"],
+      .android-device [style*="perspective"],
+      .android-device [style*="transform"] {
+        transform: none !important;
+        rotate: 0deg !important;
+        perspective: none !important;
+        transform-style: flat !important;
+        transition: opacity 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease !important;
+      }
+      
+      /* Mejorar rendimiento de scroll en Android */
+      .android-device .content-blocks,
+      .android-device .scrollable,
+      .android-device [class*="scroll"] {
+        -webkit-overflow-scrolling: touch !important;
+        overflow-y: auto !important;
+        overscroll-behavior: contain !important;
+        scroll-behavior: smooth !important;
+      }
+      
+      /* Optimizar tamaños de toque para Android */
+      .android-device .btn,
+      .android-device button,
+      .android-device .menu-item,
+      .android-device a,
+      .android-device input,
+      .android-device select {
+        min-height: 48px !important;
+        min-width: 48px !important;
+        padding: 12px 24px !important;
+        margin: 8px 0 !important;
       }
     `;
     document.head.appendChild(mobileStyle);

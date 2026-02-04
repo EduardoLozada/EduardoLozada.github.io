@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eduardo Lozada Ducuara - Desarrollador de Software</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a1a2e;
+            --secondary: #4a4a68;
+            --accent: #0066cc;
+            --light: #f8f9fa;
+            --border: #e0e0e0;
+            --white: #ffffff;
+            --success: #28a745;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #f0f2f5;
+            min-height: 100vh;
+            padding: 30px 20px;
+            display: flex;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .cv-container {
+            width: 100%;
+            max-width: 850px;
+            background: var(--white);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            padding: 0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, #16213e 100%);
+            color: var(--white);
+            padding: 35px 45px;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .header-name h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+
+        .header-title {
+            font-size: 16px;
+            color: #7eb8ff;
+            font-weight: 500;
+        }
+
+        .header-contact {
+            text-align: right;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        .header-contact a {
+            color: var(--white);
+            text-decoration: none;
+        }
+
+        .header-contact span {
+            display: block;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 35px 45px;
+        }
+
+        /* Sections */
+        .section {
+            margin-bottom: 28px;
+        }
+
+        .section:last-child {
+            margin-bottom: 0;
+        }
+
+        .section-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+            border-bottom: 2px solid var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Profile */
+        .profile-text {
+            color: var(--secondary);
+            text-align: justify;
+            font-size: 14px;
+        }
+
+        .keywords {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 15px;
+        }
+
+        .keyword {
+            background: var(--light);
+            color: var(--primary);
+            padding: 5px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+            border: 1px solid var(--border);
+        }
+
+        /* Experience */
+        .experience-item {
+            margin-bottom: 22px;
+            padding-bottom: 22px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .experience-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .experience-title {
+            font-weight: 700;
+            font-size: 16px;
+            color: var(--primary);
+        }
+
+        .experience-company {
+            font-weight: 600;
+            color: var(--accent);
+            font-size: 14px;
+        }
+
+        .experience-date {
+            font-size: 13px;
+            color: var(--secondary);
+            background: var(--light);
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+
+        .experience-current {
+            background: #e8f5e9;
+            color: var(--success);
+        }
+
+        .experience-functions {
+            list-style: none;
+            margin-top: 10px;
+        }
+
+        .experience-functions li {
+            padding: 4px 0;
+            padding-left: 20px;
+            position: relative;
+            color: var(--secondary);
+            font-size: 13px;
+        }
+
+        .experience-functions li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+
+        .tech-stack {
+            margin-top: 12px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .tech-tag {
+            background: var(--primary);
+            color: var(--white);
+            padding: 3px 10px;
+            border-radius: 3px;
+            font-size: 11px;
+            font-weight: 500;
+        }
+
+        /* Skills */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .skill-category h4 {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .skill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .skill-item {
+            background: var(--light);
+            color: var(--secondary);
+            padding: 5px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        /* Education */
+        .education-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .education-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .education-info h4 {
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--primary);
+        }
+
+        .education-info p {
+            font-size: 13px;
+            color: var(--secondary);
+        }
+
+        .education-year {
+            font-size: 12px;
+            color: var(--secondary);
+            background: var(--light);
+            padding: 3px 10px;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+
+        /* References */
+        .references-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .reference-item {
+            background: var(--light);
+            padding: 15px;
+            border-radius: 6px;
+            border-left: 3px solid var(--accent);
+        }
+
+        .reference-name {
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 14px;
+        }
+
+        .reference-role {
+            font-size: 12px;
+            color: var(--secondary);
+            margin-bottom: 5px;
+        }
+
+        .reference-phone {
+            font-size: 13px;
+            color: var(--accent);
+            font-weight: 500;
+        }
+
+        /* Personal Data */
+        .personal-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .personal-item {
+            font-size: 13px;
+        }
+
+        .personal-item strong {
+            color: var(--primary);
+            display: block;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 2px;
+        }
+
+        .personal-item span {
+            color: var(--secondary);
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .cv-container {
+                box-shadow: none;
+                border-radius: 0;
+            }
+            .header {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+
+        @media (max-width: 700px) {
+            .header-content {
+                flex-direction: column;
+            }
+            .header-contact {
+                text-align: left;
+            }
+            .skills-grid, .references-grid {
+                grid-template-columns: 1fr;
+            }
+            .personal-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .main-content {
+                padding: 25px 30px;
+            }
+            .header {
+                padding: 25px 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="cv-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="header-name">
+                    <h1>Eduardo Lozada Ducuara</h1>
+                    <p class="header-title">Desarrollador de Software Full Stack | +8 años de experiencia</p>
+                </div>
+                <div class="header-contact">
+                    <span>📱 302 621 0700 | 322 770 4727</span>
+                    <span>✉️ lozadaeduardo@outlook.com</span>
+                    <span>📍 Bogotá, Colombia</span>
+                    <span>🔗 github.com/eduardolozada</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Perfil Profesional -->
+            <section class="section">
+                <h2 class="section-title">Perfil Profesional</h2>
+                <p class="profile-text">
+                    Desarrollador de Software Full Stack con más de 8 años de experiencia en análisis, diseño, desarrollo e implementación de soluciones tecnológicas empresariales. Especializado en desarrollo backend con C# .NET y frontend con React y Angular. Experiencia sólida en integración de APIs REST, Web Services, y optimización de bases de datos SQL Server y Oracle. Expertise en DevOps con Azure DevOps para CI/CD, control de calidad de código con SonarQube, monitoreo de aplicaciones con Dynatrace, y reingeniería de sistemas legacy. Capacidad demostrada para liderar proyectos de migración y modernización tecnológica. Orientado a resultados con enfoque en código limpio, buenas prácticas y soluciones escalables.
+                </p>
+                <div class="keywords">
+                    <span class="keyword">Full Stack Developer</span>
+                    <span class="keyword">C# .NET</span>
+                    <span class="keyword">React.js</span>
+                    <span class="keyword">SQL Server</span>
+                    <span class="keyword">Azure DevOps</span>
+                    <span class="keyword">SonarQube</span>
+                    <span class="keyword">Dynatrace</span>
+                    <span class="keyword">API REST</span>
+                </div>
+            </section>
+
+            <!-- Experiencia Laboral -->
+            <section class="section">
+                <h2 class="section-title">Experiencia Laboral</h2>
+                
+                <div class="experience-item">
+                    <div class="experience-header">
+                        <div>
+                            <h3 class="experience-title">Desarrollador de Software</h3>
+                            <p class="experience-company">Global Hitss Colombia</p>
+                        </div>
+                        <span class="experience-date experience-current">Jul 2024 – Actual</span>
+                    </div>
+                    <ul class="experience-functions">
+                        <li>Análisis de código y migración de aplicativos a nuevas versiones de bases de datos y servidores</li>
+                        <li>Descompilación y reingeniería de proyectos legacy para modernización tecnológica</li>
+                        <li>Control de calidad de código con SonarQube para garantizar estándares de desarrollo</li>
+                        <li>Monitoreo de aplicaciones y performance con Dynatrace</li>
+                        <li>Despliegues y gestión de CI/CD en Azure DevOps</li>
+                        <li>Ajustes y optimización para garantizar funcionalidad de portales migrados</li>
+                    </ul>
+                    <div class="tech-stack">
+                        <span class="tech-tag">C#</span>
+                        <span class="tech-tag">VB.NET</span>
+                        <span class="tech-tag">Oracle</span>
+                        <span class="tech-tag">SQL Server</span>
+                        <span class="tech-tag">Azure DevOps</span>
+                        <span class="tech-tag">SonarQube</span>
+                        <span class="tech-tag">Dynatrace</span>
+                    </div>
+                </div>
+
+                <div class="experience-item">
+                    <div class="experience-header">
+                        <div>
+                            <h3 class="experience-title">Desarrollador de Software</h3>
+                            <p class="experience-company">Sofigc (Temporal)</p>
+                        </div>
+                        <span class="experience-date">Ene 2024 – Jul 2024</span>
+                    </div>
+                    <ul class="experience-functions">
+                        <li>Análisis de código y migración de aplicativos a nuevas versiones de bases de datos y servidores</li>
+                        <li>Descompilación y reingeniería de proyectos legacy</li>
+                        <li>Control de calidad de código con SonarQube</li>
+                        <li>Monitoreo de aplicaciones con Dynatrace</li>
+                        <li>Despliegues en Azure DevOps</li>
+                        <li>Mantenimiento y soporte de sistemas empresariales</li>
+                    </ul>
+                    <div class="tech-stack">
+                        <span class="tech-tag">C#</span>
+                        <span class="tech-tag">VB.NET</span>
+                        <span class="tech-tag">Oracle</span>
+                        <span class="tech-tag">SQL Server</span>
+                        <span class="tech-tag">Azure DevOps</span>
+                        <span class="tech-tag">SonarQube</span>
+                        <span class="tech-tag">Dynatrace</span>
+                    </div>
+                </div>
+
+                <div class="experience-item">
+                    <div class="experience-header">
+                        <div>
+                            <h3 class="experience-title">Desarrollador Java</h3>
+                            <p class="experience-company">Novatec Solutions SAS (Temporal)</p>
+                        </div>
+                        <span class="experience-date">Jul 2023 – Dic 2023</span>
+                    </div>
+                    <ul class="experience-functions">
+                        <li>Análisis de código y migración de aplicativos a nuevas versiones de bases de datos y servidores</li>
+                        <li>Descompilación y reingeniería de proyectos legacy</li>
+                        <li>Control de calidad de código con SonarQube</li>
+                        <li>Monitoreo de aplicaciones con Dynatrace</li>
+                        <li>Despliegues en Azure DevOps</li>
+                        <li>Ajustes y optimización para garantizar funcionalidad de portales migrados</li>
+                    </ul>
+                    <div class="tech-stack">
+                        <span class="tech-tag">C#</span>
+                        <span class="tech-tag">VB.NET</span>
+                        <span class="tech-tag">Oracle</span>
+                        <span class="tech-tag">SQL Server</span>
+                        <span class="tech-tag">PHP</span>
+                        <span class="tech-tag">Azure DevOps</span>
+                        <span class="tech-tag">SonarQube</span>
+                    </div>
+                </div>
+
+                <div class="experience-item">
+                    <div class="experience-header">
+                        <div>
+                            <h3 class="experience-title">Analista de Ingeniería</h3>
+                            <p class="experience-company">COMERSSIA (ACL Software SAS)</p>
+                        </div>
+                        <span class="experience-date">Feb 2018 – Jun 2023</span>
+                    </div>
+                    <ul class="experience-functions">
+                        <li>Desarrollo de hotfix y optimización de aplicativos empresariales</li>
+                        <li>Diseño e implementación de soluciones según requerimientos del cliente</li>
+                        <li>Creación de Stored Procedures y diseño de reportes con Reporting Services</li>
+                        <li>Optimización de consultas SQL avanzadas para mejorar rendimiento</li>
+                        <li>Integraciones con APIs REST y Web Services externos</li>
+                        <li>Manejo de estructuras de datos XML y JSON</li>
+                        <li>Desarrollo de procesos DTS y ETL en SQL Server</li>
+                        <li>Desarrollo de aplicativos para comunicación con datáfonos y dispositivos PDA</li>
+                        <li>Creación de sistema de picking y packing para gestión de pedidos</li>
+                        <li>Integración con APIs de transportadoras a nivel nacional</li>
+                    </ul>
+                    <div class="tech-stack">
+                        <span class="tech-tag">C#</span>
+                        <span class="tech-tag">React.js</span>
+                        <span class="tech-tag">Angular</span>
+                        <span class="tech-tag">VB.NET</span>
+                        <span class="tech-tag">VB6</span>
+                        <span class="tech-tag">SQL Server</span>
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">Bootstrap</span>
+                        <span class="tech-tag">Material Design</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Habilidades Técnicas -->
+            <section class="section">
+                <h2 class="section-title">Habilidades Técnicas</h2>
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <h4>Lenguajes de Programación</h4>
+                        <div class="skill-list">
+                            <span class="skill-item">C#</span>
+                            <span class="skill-item">Java</span>
+                            <span class="skill-item">JavaScript</span>
+                            <span class="skill-item">TypeScript</span>
+                            <span class="skill-item">PHP</span>
+                            <span class="skill-item">VB.NET</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h4>Frameworks & Librerías</h4>
+                        <div class="skill-list">
+                            <span class="skill-item">.NET Framework</span>
+                            <span class="skill-item">React.js</span>
+                            <span class="skill-item">Angular</span>
+                            <span class="skill-item">jQuery</span>
+                            <span class="skill-item">Bootstrap</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h4>Bases de Datos</h4>
+                        <div class="skill-list">
+                            <span class="skill-item">SQL Server</span>
+                            <span class="skill-item">Oracle</span>
+                            <span class="skill-item">MySQL</span>
+                            <span class="skill-item">Reporting Services</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h4>DevOps & Herramientas</h4>
+                        <div class="skill-list">
+                            <span class="skill-item">Azure DevOps</span>
+                            <span class="skill-item">SonarQube</span>
+                            <span class="skill-item">Dynatrace</span>
+                            <span class="skill-item">Git</span>
+                            <span class="skill-item">CI/CD</span>
+                            <span class="skill-item">API REST</span>
+                            <span class="skill-item">ETL/DTS</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Formación Académica -->
+            <section class="section">
+                <h2 class="section-title">Formación Académica</h2>
+                <div class="education-item">
+                    <div class="education-info">
+                        <h4>Ingeniería de Software</h4>
+                        <p>Corporación Universitaria Iberoamericana</p>
+                    </div>
+                    <span class="education-year" style="background: #e8f5e9; color: #28a745;">2023 – En curso</span>
+                </div>
+                <div class="education-item">
+                    <div class="education-info">
+                        <h4>Tecnólogo en Análisis y Desarrollo de Sistemas de Información</h4>
+                        <p>SENA – Centro de Gestión de Mercados, Logística y TI</p>
+                    </div>
+                    <span class="education-year">2017</span>
+                </div>
+                <div class="education-item">
+                    <div class="education-info">
+                        <h4>Técnico en Desarrollo de Software con C# .NET</h4>
+                        <p>SENA – Colegio Distrital José Martí</p>
+                    </div>
+                    <span class="education-year">2016</span>
+                </div>
+                <div class="education-item">
+                    <div class="education-info">
+                        <h4>Bachiller Técnico</h4>
+                        <p>Colegio Distrital José Martí</p>
+                    </div>
+                    <span class="education-year">2016</span>
+                </div>
+            </section>
+
+            <!-- Datos Personales -->
+            <section class="section">
+                <h2 class="section-title">Datos Personales</h2>
+                <div class="personal-grid">
+                    <div class="personal-item">
+                        <strong>Documento</strong>
+                        <span>C.C. 1007289094</span>
+                    </div>
+                    <div class="personal-item">
+                        <strong>Fecha de Nacimiento</strong>
+                        <span>20 de mayo de 2000</span>
+                    </div>
+                    <div class="personal-item">
+                        <strong>Lugar de Nacimiento</strong>
+                        <span>Chaparral, Tolima</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Referencias -->
+            <section class="section">
+                <h2 class="section-title">Referencias Profesionales</h2>
+                <div class="references-grid">
+                    <div class="reference-item">
+                        <p class="reference-name">Leonardo Vega</p>
+                        <p class="reference-role">Jefe Directo – COMERSSIA / ACL Software</p>
+                        <p class="reference-phone">📞 482 4090</p>
+                    </div>
+                    <div class="reference-item">
+                        <p class="reference-name">Víctor Pinzón</p>
+                        <p class="reference-role">Jefe – Novatec Solutions</p>
+                        <p class="reference-phone">📞 320 395 5109</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Referencias Personales -->
+            <section class="section">
+                <h2 class="section-title">Referencias Personales</h2>
+                <div class="references-grid">
+                    <div class="reference-item">
+                        <p class="reference-name">Tannia Lorena Vallejo</p>
+                        <p class="reference-role">Auxiliar de Enfermería</p>
+                        <p class="reference-phone">📞 322 770 4727</p>
+                    </div>
+                    <div class="reference-item">
+                        <p class="reference-name">Juan David Ducuara</p>
+                        <p class="reference-role">Desarrollador Salesforce</p>
+                        <p class="reference-phone">📞 319 652 3577</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>
+
+
